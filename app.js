@@ -1,13 +1,20 @@
 const express = require('express');
+const hbs = require('express-handlebars')
 
 const app = express();
 
+//Handle Bars Middle Ware
+app.engine('handlebars', hbs.engine())
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
 app.get('/', (req, res)=>{
-    res.send("Hello VidJot")
+    const title = 'WELCOME TO VIDJOT'
+    res.render('index', {title:title})
 })
 
 app.get('/about', (req, res)=>{
-    res.send('Welcome to the about page!!\n VidJot is used to jot your video ideas on the web')
+    res.render('about')
 })
 
 const port = 5000;
